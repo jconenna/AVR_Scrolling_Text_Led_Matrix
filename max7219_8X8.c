@@ -53,7 +53,7 @@ void initMatrix()
 
 	// Set display brighness
 	SLAVE_SELECT;
-	for(i = 0; i < NUM_DEVICES; i++)	// Loop through number of cascaded devices
+	for(i = 0; i < NUM_DEVICES; i++)   // Loop through number of cascaded devices
 	{
 		writeByte(0x0A); // Select Intensity register
 		writeByte(0x07); // Set brightness
@@ -128,11 +128,11 @@ void pushBuffer(uint8_t x)
 // Pushes in 5 characters columns into the buffer.
 void pushCharacter(uint8_t c)
 {
-		for(uint8_t i = 0; i < 5; i++)						// For 5 bytes representing each character
+		for(uint8_t i = 0; i < 5; i++)				// For 5 bytes representing each character
 		{
 			pushBuffer(pgm_read_byte(&characters[c][i]));   // Push the byte from the characters array to the display buffer
-			displayBuffer();								// Display the current buffer on the devices
-			_delay_us(DEL);									// and delay
+			displayBuffer();				// Display the current buffer on the devices
+			_delay_us(DEL);					// and delay
 		}
 }
 
@@ -142,9 +142,9 @@ void displayMessage(const char *arrayPointer, uint16_t arraySize)
 	for(uint16_t i = 0; i < arraySize; i++)
 	{
 		pushCharacter(pgm_read_byte_near(arrayPointer + i) - 32);	// Send converted ASCII value of character in message to index in characters array (-32 sends corrent index to characters array)
-		pushBuffer(0x00);								            // Add empty column after character for letter spacing
-		displayBuffer();								            // Display &
-		_delay_us(DEL); 								            // Delay
+		pushBuffer(0x00);						// Add empty column after character for letter spacing
+		displayBuffer();						// Display &
+		_delay_us(DEL); 						// Delay
 	}
 	
 }
