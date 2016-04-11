@@ -19,7 +19,7 @@ uint8_t buffer [NUM_DEVICES*8];
 // Initializes SPI
 void initSPI(void) 
 {
-  DDRB |= (1 << PB2);		// Set SS output 
+  DDRB |= (1 << PB2);	    // Set SS output 
   PORTB |= (1 << PB2);      // Begin high (unselected)
 
   DDRB |= (1 << PB3);       // Output on MOSI 
